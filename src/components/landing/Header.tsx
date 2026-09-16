@@ -1,0 +1,49 @@
+import Link from "next/link";
+import Image from "next/image";
+import React from 'react'
+import { Show, SignInButton, SignUpButton, UserButton, } from "@clerk/nextjs";
+
+function Header() {
+  return (
+    <nav className="fixed top-0 right-0 left-0 z-50 px-6 py-2 border-b border-border/50
+    bg-background/80 backdrop-blur-md h-16">
+      <div className="max-w-6xl mx-auto flex justify-between items-center">
+        <Link href="/" className="flex items-center gap-2">
+          <Image src={"/logo.png"} alt="DentWise Logo" width={32} height={32} className="w-11" />
+          <span className="font-semibold text-lg">Dentwise</span>
+        </Link>
+        <div className="hidden md:flex items-center gap-8">
+          <a href="#" className="text-muted-foreground hover:text-foreground">
+            How  it works
+          </a>
+          <a href="#" className="text-muted-foreground hover:text-foreground">
+            Pricing
+          </a>
+          <a href="#" className="text-muted-foreground hover:text-foreground">
+            About
+          </a>
+        </div>
+        <div className="flex items-center gap-3">
+          <Show when="signed-out">
+            <SignInButton mode="modal">
+              <button className="text-sm font-medium hover:text-foreground">
+                Login
+              </button>
+            </SignInButton>
+
+            <SignUpButton mode="modal">
+              <button className="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium">
+                Sign Up
+              </button>
+            </SignUpButton>
+          </Show>
+          <Show when="signed-in">
+            <UserButton />
+          </Show>
+        </div>
+      </div>
+    </nav>
+  )
+}
+
+export default Header
